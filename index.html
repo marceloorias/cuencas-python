@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_52a8a55406f6c4afdfb5dd56aff5c20b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_52a8a55406f6c4afdfb5dd56aff5c20b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_52a8a55406f6c4afdfb5dd56aff5c20b = L.map(
+                "map_52a8a55406f6c4afdfb5dd56aff5c20b",
+                {
+                    center: [-39.82, -73.25],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    drawExport: false,
+                    layersControl: true,
+                }
+            );
+            L.control.scale().addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+
+            
+
+        
+    
+            var tile_layer_b737539f4808effa804da55a88490a18 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 24, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_b737539f4808effa804da55a88490a18.addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+            L.control.fullscreen(
+                {"forceSeparateButton": false, "position": "topleft", "title": "Full Screen", "titleCancel": "Exit Full Screen"}
+            ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+            var options = {
+              position: "topleft",
+              draw: {},
+              edit: {},
+            }
+                // FeatureGroup is to store editable layers.
+                var drawnItems_draw_control_bb65d7e4ad08b4226c0903b84dc56602 =
+                    new L.featureGroup().addTo(
+                        map_52a8a55406f6c4afdfb5dd56aff5c20b
+                    );
+
+            options.edit.featureGroup = drawnItems_draw_control_bb65d7e4ad08b4226c0903b84dc56602;
+            var draw_control_bb65d7e4ad08b4226c0903b84dc56602 = new L.Control.Draw(
+                options
+            ).addTo( map_52a8a55406f6c4afdfb5dd56aff5c20b );
+            map_52a8a55406f6c4afdfb5dd56aff5c20b.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on('click', function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems_draw_control_bb65d7e4ad08b4226c0903b84dc56602.addLayer(layer);
+            });
+            map_52a8a55406f6c4afdfb5dd56aff5c20b.on('draw:created', function(e) {
+                drawnItems_draw_control_bb65d7e4ad08b4226c0903b84dc56602.addLayer(e.layer);
+            });
+
+            
+        
+    
+            var measure_control_920c79ab4971ecb0dc7bbf01e1fc890e = new L.Control.Measure(
+                {"position": "bottomleft", "primaryAreaUnit": "sqmeters", "primaryLengthUnit": "meters", "secondaryAreaUnit": "acres", "secondaryLengthUnit": "miles"});
+            map_52a8a55406f6c4afdfb5dd56aff5c20b.addControl(measure_control_920c79ab4971ecb0dc7bbf01e1fc890e);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+
+            var geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c = {"collapsed": true, "defaultMarkGeocode": true, "position": "topleft", "provider": "nominatim", "providerOptions": {}, "zoom": 11};
+
+            // note: geocoder name should start with lowercase
+            var geocoderName_geocoder_37d16762e750c222e1c445122274d87c = geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c["provider"];
+
+            var customGeocoder_geocoder_37d16762e750c222e1c445122274d87c = L.Control.Geocoder[ geocoderName_geocoder_37d16762e750c222e1c445122274d87c ](
+                geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c['providerOptions']
+            );
+            geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c["geocoder"] = customGeocoder_geocoder_37d16762e750c222e1c445122274d87c;
+
+            L.Control.geocoder(
+                geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c
+            ).on('markgeocode', function(e) {
+                var zoom = geocoderOpts_geocoder_37d16762e750c222e1c445122274d87c['zoom'] || map_52a8a55406f6c4afdfb5dd56aff5c20b.getZoom();
+                map_52a8a55406f6c4afdfb5dd56aff5c20b.setView(e.geocode.center, zoom);
+            }).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+
+        
+    
+            map_52a8a55406f6c4afdfb5dd56aff5c20b.fitBounds(
+                [[-39.82, -73.25], [-39.82, -73.25]],
+                {"maxZoom": 11}
+            );
+        
+    
+            var tile_layer_945f3bb7a72091fc85977b962cd03ec0 = L.tileLayer(
+                "https://mt1.google.com/vt/lyrs=s\u0026x={x}\u0026y={y}\u0026z={z}\u0026key=YOUR-API-KEY",
+                {"attribution": "Google", "detectRetina": false, "maxZoom": 24, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_945f3bb7a72091fc85977b962cd03ec0.addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+        L.Control.CustomControl = L.Control.extend({
+            onAdd: function(map) {
+                let div = L.DomUtil.create('div');
+                div.innerHTML = `<div style="font-size: 20px; color: black; font-weight: normal;
+            padding: 5px; background-color: white;
+            border-radius: 5px;">Centros de interés turístico de Valdivia</div>`;
+                return div;
+            },
+            onRemove: function(map) {
+                // Nothing to do here
+            }
+        });
+        L.control.customControl = function(opts) {
+            return new L.Control.CustomControl(opts);
+        }
+        L.control.customControl(
+            { position: "topright" }
+        ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+            var marker_ea5faf6ac12d11c619b00f59cda3ca90 = L.marker(
+                [-39.867, -73.396],
+                {"iconColor": "darkred"}
+            ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+        var popup_4f8e66134b15df1db1de0e0780a4755b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_999e788748a896b7c9d75925144ec349 = $(`<div id="html_999e788748a896b7c9d75925144ec349" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Fuerte de Niebla</b><br>           Describa el sitio<br>           <img src="fuerte_niebla.jpg" alt="Fuerte de Niebla" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_4f8e66134b15df1db1de0e0780a4755b.setContent(html_999e788748a896b7c9d75925144ec349);
+            
+        
+
+        marker_ea5faf6ac12d11c619b00f59cda3ca90.bindPopup(popup_4f8e66134b15df1db1de0e0780a4755b)
+        ;
+
+        
+    
+    
+            var marker_04cb78da489a6d6c7847870fc8e5354d = L.marker(
+                [-39.883, -73.428],
+                {"iconColor": "darkred"}
+            ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+        var popup_eb86466bae0b74351bc95b2ed7a3c655 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_079d96c8d689fb77d553bb026306bdad = $(`<div id="html_079d96c8d689fb77d553bb026306bdad" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Castillo de Corral</b><br>           Describa el sitio<br>           <img src="fuerte_corral.jpg" alt="Castillo de Corral" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_eb86466bae0b74351bc95b2ed7a3c655.setContent(html_079d96c8d689fb77d553bb026306bdad);
+            
+        
+
+        marker_04cb78da489a6d6c7847870fc8e5354d.bindPopup(popup_eb86466bae0b74351bc95b2ed7a3c655)
+        ;
+
+        
+    
+    
+            var marker_2664c2f439cc1ad49b930695b4a78489 = L.marker(
+                [-39.817, -73.245],
+                {"iconColor": "darkred"}
+            ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+        
+    
+        var popup_1e56f18ec7640edd538c19ec2940c0a3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a70d9b05db482194217b75f8f58caee2 = $(`<div id="html_a70d9b05db482194217b75f8f58caee2" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Museo de la telecomunicaciones</b><br>           describa el sitio<br>           <img src="museo_tele.jpg" alt="Museo de la telecomunicaciones" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_1e56f18ec7640edd538c19ec2940c0a3.setContent(html_a70d9b05db482194217b75f8f58caee2);
+            
+        
+
+        marker_2664c2f439cc1ad49b930695b4a78489.bindPopup(popup_1e56f18ec7640edd538c19ec2940c0a3)
+        ;
+
+        
+    
+    
+            var layer_control_8b8b66d2963569632f624b57f2dd91b3_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_b737539f4808effa804da55a88490a18,
+                },
+                overlays :  {
+                    "Google Satellite" : tile_layer_945f3bb7a72091fc85977b962cd03ec0,
+                },
+            };
+            let layer_control_8b8b66d2963569632f624b57f2dd91b3 = L.control.layers(
+                layer_control_8b8b66d2963569632f624b57f2dd91b3_layers.base_layers,
+                layer_control_8b8b66d2963569632f624b57f2dd91b3_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_52a8a55406f6c4afdfb5dd56aff5c20b);
+
+        
+</script>
+</html>
